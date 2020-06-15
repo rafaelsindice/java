@@ -1,0 +1,45 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package syslivros;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author Rafael
+ */
+public class SysLivros {
+    
+    //metodo que busca o id da tabela
+public static int GetID(String tabela, String idTabela, int ID) throws SQLException{
+     int idProf []=new int[2000];
+    int i=1;
+    
+        PreparedStatement ps =Conexao.ConexaoJDBC.prepareStatement("select * from "+tabela +" where "+idTabela+">0");
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            
+            idProf[i]=rs.getInt(idTabela);
+            
+        i++;
+        }
+        ID=1;
+     
+     ID++;
+       
+return idProf[ID] ;
+}
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+          
+        
+        
+       new Principal().setVisible(true);
+    }
+}

@@ -1,0 +1,30 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package syslivros;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+/**
+ *
+ * @author Rafael
+ */
+public class Conexao {
+    public static Connection ConexaoJDBC;
+    public void conectar(String user, String pass) throws ClassNotFoundException, SQLException{
+        Class.forName("com.mysql.jdbc.Driver");
+        String url="";
+        ConexaoJDBC=DriverManager.getConnection(url,user,pass);
+        
+    
+    
+    }public static void desconectar(){
+    try{ConexaoJDBC.close();}
+    catch(Exception ex){
+    
+    }
+    }
+}

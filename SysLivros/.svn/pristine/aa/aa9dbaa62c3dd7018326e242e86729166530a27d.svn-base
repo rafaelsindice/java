@@ -1,0 +1,80 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package syslivros;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+/**
+ *
+ * @author Rafael
+ */
+public class SysLivros {
+    public static Date formataData(String data) throws Exception {   
+        if (data == null || data.equals("")) {
+            return null;
+        }  
+          
+        Date date = null;  
+        try {  
+            DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");  
+            date = (Date)(java.util.Date)formatter.parse(data);  
+        } catch (ParseException e) {              
+            throw e;  
+        }  
+        return date;  
+    }  
+    /**
+     * Converte uma data no formato 02/02/1900 para 1900-02-02 e vice-versa
+     *
+     * @param Date
+     * @return Data no formato inglês ou português
+     */
+    public static String DataPTtoENtoPT(String Date) {
+        String[] Data;
+        String DataCerta;
+        if (Date.indexOf("/") >= 0) {
+            Data = Date.split("/");
+            DataCerta = Data[2] + "-" + Data[1] + "-" + Data[0];
+        } else {
+            Data = Date.split("-");
+            DataCerta = Data[2] + "/" + Data[1] + "/" + Data[0];
+        }
+        return DataCerta;
+    }
+    //metodo que busca o id da tabela
+public static int GetID(String tabela, String idTabela, int ID) throws SQLException{
+     int idProf []=new int[2000];
+    int i=1;
+    
+        PreparedStatement ps =Conexao.ConexaoJDBC.prepareStatement("select * from "+tabela +" where "+idTabela+">0");
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            
+            idProf[i]=rs.getInt(idTabela);
+            
+        i++;
+        }
+        ID=1;
+     
+     ID++;
+       
+return idProf[ID] ;
+}
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+          
+        
+        
+       new Principal().setVisible(true);
+    }
+}
